@@ -1,0 +1,7 @@
+site_name: My Docs
+
+nav:
+  - Outline: index.md
+  - Core Loop Code: core_loop_code.md
+  - Module1: dir1/m1.md
+  - Module2: m2.md
