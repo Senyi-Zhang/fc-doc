@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../img/favicon.ico">
+        <title>Module3 - FC SYSTEM</title>
+        <link href="../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../css/brands.min.css" rel="stylesheet">
+        <link href="../css/solid.min.css" rel="stylesheet">
+        <link href="../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" >
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="..">FC SYSTEM</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item">
+                                <a href=".." class="nav-link">Outline</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../core_loop_code/" class="nav-link">Core Loop Code</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../dir1/m1/" class="nav-link">Module1</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../m2/" class="nav-link">Module2</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="./" class="nav-link active" aria-current="page">Module3</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../m4/" class="nav-link">Module4</a>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item">
+                                <a rel="prev" href="../m2/" class="nav-link">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a rel="next" href="../m4/" class="nav-link">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="2"><a href="#module-3-evidence-claim-relevance-analysis" class="nav-link">Module 3: Evidence-Claim Relevance Analysis</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h2 id="module-3-evidence-claim-relevance-analysis">Module 3: Evidence-Claim Relevance Analysis</h2>
+<h3 id="1-goal-and-importance">1. Goal and Importance</h3>
+<p>The primary goal of Module 3 is to critically assess whether the evidence snippets retrieved by Module 2 are semantically relevant to the specific factual assertion made in the input <code>claim_text</code>. This is a crucial filtering step to ensure that only pertinent information proceeds to Module 4 for the actual verification process. Passing irrelevant evidence downstream would lead to incorrect verification outcomes and wasted computational resources.</p>
+<h3 id="2-core-technology-leveraging-large-language-models-llms">2. Core Technology: Leveraging Large Language Models (LLMs)</h3>
+<p>This module heavily relies on the advanced natural language understanding (NLU) and natural language inference (NLI) capabilities of LLMs. As anticipated, determining semantic relevance between two pieces of text (the claim and the potential evidence) is a task where LLMs demonstrate strong performance. They can:</p>
+<ul>
+<li>Understand the core meaning and intent behind both the claim and the evidence.</li>
+<li>Go beyond simple keyword matching to identify contextual and semantic relationships.</li>
+<li>Recognize nuances, synonymy, and implied meanings that are critical for accurate relevance assessment.</li>
+</ul>
+<h3 id="3-process-overview">3. Process Overview</h3>
+<ol>
+<li>
+<p><strong>Input:</strong></p>
+<ul>
+<li>The original <code>claim_text</code> (from Module 1).</li>
+<li>A <code>retrieved_evidence_snippet</code> (including its source, e.g., URL/article title, provided by Module 2). This process is typically performed for each snippet retrieved in a batch from Module 2.</li>
+</ul>
+</li>
+<li>
+<p><strong>LLM Task &amp; Prompting Strategy:</strong></p>
+<ul>
+<li>The LLM is provided with both the <code>claim_text</code> and the <code>evidence_snippet</code>.</li>
+<li>A carefully crafted prompt instructs the LLM to determine if the <code>evidence_snippet</code> directly pertains to, and could potentially help verify or refute, the factual assertion made in the <code>claim_text</code>.</li>
+<li>The LLM is typically asked to output:<ul>
+<li>A clear relevance judgment (e.g., "Relevant," "Not Relevant"). A "Partially Relevant" or "Uncertain" category might also be used, potentially with different downstream handling.</li>
+<li>(Recommended) A brief justification for its decision, particularly if the evidence is deemed "Not Relevant." This aids in system debugging, performance analysis, and potential refinement of Module 2's retrieval strategies.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Output:</strong></p>
+<ul>
+<li>For each evidence snippet: A relevance status (e.g., <code>is_relevant: true/false</code>).</li>
+<li>The module will pass forward only those evidence snippets identified as "Relevant."</li>
+<li>(Optional) The LLM's rationale for its judgments.</li>
+</ul>
+</li>
+</ol>
+<h3 id="4-key-considerations">4. Key Considerations</h3>
+<p>While LLMs significantly simplify this task, certain aspects require attention:</p>
+<ul>
+<li><strong>Defining "Relevance" for Fact-Checking:</strong> The prompt must clearly define what constitutes actionable relevance. For instance, the evidence should not just be about the same general topic or entities but must address the specific factual core of the claim.</li>
+<li><strong>Handling Nuance and Ambiguity:</strong> While LLMs are generally robust, prompts may need iterative tuning to handle subtle cases of irrelevance or highly nuanced claims effectively.</li>
+<li><strong>Confidence Thresholds (Optional):</strong> If the LLM provides a confidence score for its relevance assessment, a system-defined threshold can be used to make the final relevance decision.</li>
+<li><strong>Feedback Loop to Module 2:</strong> If none of the evidence snippets in a batch from Module 2 are deemed relevant, Module 3 signals this outcome. This feedback is critical for triggering the re-retrieval mechanisms in Module 2, prompting it to try different queries or sources.</li>
+</ul>
+<h3 id="5-expected-outcome">5. Expected Outcome</h3>
+<p>The successful execution of Module 3 results in a curated list of evidence snippets that are highly pertinent to the claim under investigation. This filtered set is then passed to Module 4, providing a solid and focused foundation for the final claim verification step</p></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = "..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../js/base.js"></script>
+        <script src="../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

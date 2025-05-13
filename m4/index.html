@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../img/favicon.ico">
+        <title>Module4 - FC SYSTEM</title>
+        <link href="../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../css/brands.min.css" rel="stylesheet">
+        <link href="../css/solid.min.css" rel="stylesheet">
+        <link href="../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" >
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="..">FC SYSTEM</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item">
+                                <a href=".." class="nav-link">Outline</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../core_loop_code/" class="nav-link">Core Loop Code</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../dir1/m1/" class="nav-link">Module1</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../m2/" class="nav-link">Module2</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../m3/" class="nav-link">Module3</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="./" class="nav-link active" aria-current="page">Module4</a>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item">
+                                <a rel="prev" href="../m3/" class="nav-link">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a rel="next" class="nav-link disabled">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="2"><a href="#module-4-claim-verification-explanation-confidence-scoring" class="nav-link">Module 4: Claim Verification, Explanation &amp; Confidence Scoring</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h2 id="module-4-claim-verification-explanation-confidence-scoring">Module 4: Claim Verification, Explanation &amp; Confidence Scoring</h2>
+<h3 id="1-goal-and-core-functionality">1. Goal and Core Functionality</h3>
+<p>Module 4 is the final analytical stage where the veracity of the input <code>claim_text</code> is determined based on the curated, relevant <code>evidence_snippets</code> provided by Module 3. Beyond a simple true/false judgment, this module aims to:</p>
+<ol>
+<li><strong>Verify the Claim:</strong> Determine if the claim is supported, refuted, or if the evidence remains insufficient for a definitive conclusion. It may also identify claims that are partially true or nuanced.</li>
+<li><strong>Generate Explanations:</strong> Produce a clear, human-readable explanation for the verification decision, referencing specific pieces of evidence.</li>
+<li><strong>Assign a Confidence Score:</strong> Provide an estimated level of confidence in the verification status.</li>
+</ol>
+<h3 id="2-leveraging-llms-for-verification-and-explanation">2. Leveraging LLMs for Verification and Explanation</h3>
+<p>LLMs are central to this module's operation. Their strengths are particularly well-suited for:</p>
+<ul>
+<li><strong>Natural Language Inference (NLI):</strong> LLMs can effectively determine if the evidence entails, contradicts, or is neutral towards the claim.</li>
+<li><strong>Evidence Synthesis:</strong> They can process and synthesize information from multiple evidence snippets to form a holistic judgment.</li>
+<li><strong>Reasoning:</strong> Modern LLMs can perform multi-step reasoning (especially when guided by techniques like chain-of-thought prompting) to connect evidence to the claim's assertions.</li>
+<li><strong>Explanation Generation:</strong> A key strength of LLMs is their ability to articulate the "why" behind their conclusions, citing evidence in a coherent narrative. This is vital for system transparency and user trust.</li>
+</ul>
+<p>The process typically involves prompting the LLM with the claim and the set of relevant evidence snippets. The LLM is then tasked to output its assessment of the claim's truthfulness and a supporting explanation.</p>
+<h3 id="3-the-challenge-assigning-a-reliable-confidence-score">3. The Challenge: Assigning a Reliable Confidence Score</h3>
+<p>While LLMs can express their conclusions with strong linguistic certainty, translating this into a robust, numerical confidence score is non-trivial. This is because:</p>
+<ul>
+<li><strong>Lack of Inherent Probabilistic Output for Facts:</strong> Standard LLM text generations don't natively include a statistically calibrated probability of the assertion being true. Token probabilities are related to word sequence likelihood, not factual accuracy confidence.</li>
+<li><strong>Calibration Issues:</strong> If an LLM is prompted to provide a numerical score (e.g., "rate your confidence 0-100%"), this score may not be well-calibrated. An LLM might consistently report high confidence even when its error rate for that level is significant.</li>
+<li><strong>Sensitivity to Prompting and Phrasing:</strong> The expressed confidence can vary based on how the LLM is prompted.</li>
+<li><strong>Potential for Overconfidence ("Hallucination"):</strong> LLMs can occasionally generate incorrect statements (hallucinations) with a high degree of apparent confidence in their language.</li>
+</ul>
+<h3 id="4-approaches-to-confidence-score-generationestimation">4. Approaches to Confidence Score Generation/Estimation</h3>
+<p>Given the challenges, a multi-faceted or proxy-based approach to confidence scoring is often necessary. Here are strategies being considered:</p>
+<ol>
+<li>
+<p><strong>Direct Prompting for Qualitative Score &amp; Rationale:</strong></p>
+<ul>
+<li><strong>Method:</strong> Instruct the LLM to not only verify the claim but also to provide a qualitative confidence level (e.g., "High," "Medium," "Low") or a score on a simple scale (e.g., 1-5). Crucially, the LLM must also explain <em>why</em> it assigns this level of confidence, citing factors like evidence quality, consistency, or ambiguity.</li>
+<li><strong>Utility:</strong> The textual rationale for the confidence level is often more insightful than the score itself and can be presented to the user.</li>
+</ul>
+</li>
+<li>
+<p><strong>Analysis of LLM's Explanation for Uncertainty Cues:</strong></p>
+<ul>
+<li><strong>Method:</strong> The generated explanation can be analyzed (potentially by another, smaller NLP model or keyword spotting) for linguistic markers of certainty or uncertainty (e.g., "definitely proves" vs. "it seems likely," "evidence suggests but does not confirm").</li>
+<li><strong>Utility:</strong> Provides a textual basis for inferring confidence.</li>
+</ul>
+</li>
+<li>
+<p><strong>Evidence-Based Heuristics (System-Derived Score):</strong></p>
+<ul>
+<li><strong>Method:</strong> The system can compute a score based on characteristics of the evidence used by the LLM for its judgment:<ul>
+<li><strong>Quantity &amp; Consistency:</strong> Number of distinct evidence pieces supporting the conclusion. High agreement among pieces boosts confidence.</li>
+<li><strong>Source Credibility (if available from Module 2/3):</strong> Evidence from more authoritative sources could contribute to higher confidence.</li>
+<li><strong>Presence of Contradictions:</strong> If the LLM acknowledges and resolves contradictions, or if unresolved contradictions remain, this affects confidence. Resolved contradictions might still lead to high confidence in the final verdict; unresolved ones would lower it.</li>
+<li><strong>Evidence Specificity:</strong> How directly and unambiguously does the evidence address the claim's core assertions?</li>
+</ul>
+</li>
+<li><strong>Utility:</strong> Offers a more objective, albeit indirect, measure of confidence based on the input to the LLM's reasoning process.</li>
+</ul>
+</li>
+<li>
+<p><strong>Consistency Checks:</strong></p>
+<ul>
+<li><strong>Method:</strong><ul>
+<li><strong>Multiple Prompts/Re-runs:</strong> Query the LLM multiple times with slight variations in the prompt or by asking it to "re-evaluate its previous assessment." Consistent outcomes suggest higher stability.</li>
+<li><strong>Self-Critique:</strong> Ask the LLM to critique its own initial verification and explanation, identifying any potential weaknesses or ambiguities. A strong, unconvincing self-critique could imply higher confidence in the original assertion.</li>
+</ul>
+</li>
+<li><strong>Utility:</strong> Can reveal the robustness of the LLM's conclusion.</li>
+</ul>
+</li>
+</ol>
+<p><strong>Current Thinking:</strong>
+Our primary focus will be on achieving accurate verification and high-quality explanations. For confidence scoring, we will likely start by combining <strong>Direct Prompting for Qualitative Score &amp; Rationale</strong> (1) with <strong>Evidence-Based Heuristics</strong> (3). The numerical score will be presented as an <em>estimate</em>, with the textual explanation and the evidence characteristics providing richer context for the system's confidence.</p>
+<h3 id="5-output-of-module-4">5. Output of Module 4</h3>
+<p>The final output for a given claim will include:</p>
+<ul>
+<li><code>verification_status</code>: (e.g., SUPPORTED, REFUTED, INSUFFICIENT_EVIDENCE, NUANCED).</li>
+<li><code>explanation_text</code>: Detailed reasoning with references to evidence.</li>
+<li><code>confidence_score</code>: The estimated confidence (e.g., a numerical score or qualitative label like "High").</li>
+<li><code>confidence_rationale</code>: Factors influencing the confidence score.</li>
+<li><code>cited_evidence_references</code>: Links or identifiers to the specific evidence snippets crucial for the decision.</li>
+</ul></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = "..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../js/base.js"></script>
+        <script src="../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>
